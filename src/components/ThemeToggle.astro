@@ -66,6 +66,19 @@ import Icon from './Icon.astro';
 </style>
 
 <script>
+
+  function toggleUtterancesTheme() {
+  	if (document.querySelector('.utterances-frame')) {
+  		const theme = localStorage.getItem('theme') === 'light' ? 'github-light' : 'github-dark';
+  		const message = {
+  			type: 'set-theme',
+  			theme
+  		};
+  		const iframe = document.querySelector('.utterances-frame') as HTMLIFrameElement; // omit as HTMLIFrameElement if you're wring JS
+  		iframe?.contentWindow?.postMessage(message, 'https://utteranc.es');
+  	}
+  }
+
 	class ThemeToggle extends HTMLElement {
 		constructor() {
 			super();
@@ -74,8 +87,10 @@ import Icon from './Icon.astro';
 
 			/** Set the theme to dark/light mode. */
 			const setTheme = (dark: boolean) => {
+        localStorage.setItem('theme', dark ? 'dark' : 'light');
 				document.documentElement.classList[dark ? 'add' : 'remove']('theme-dark');
 				button.setAttribute('aria-pressed', String(dark));
+       	toggleUtterancesTheme();
 			};
 
 			// Toggle the theme when a user clicks the button.
