@@ -44,6 +44,8 @@ jobs:
           plugin_skyline_quality: 0.8
 
           plugin_activity: yes
+      - run: |
+          git pull origin main
 
   build:
     needs: github-metrics
@@ -51,6 +53,7 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v3
+      - run: git pull origin main
       - name: Install, build, and upload your site
         uses: withastro/action@v0
         # with:
