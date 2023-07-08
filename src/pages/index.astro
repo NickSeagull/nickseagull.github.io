@@ -46,7 +46,7 @@ const projects = (await getCollection("blog"))
           </div>
         </Hero>
 
-        <div align="center">
+        <div>
           <div class="glitch">
             <img id="face-img" width="480" height="620" src="" />
 
@@ -68,30 +68,9 @@ const projects = (await getCollection("blog"))
     <main class="wrapper stack gap-20 lg:gap-48">
       <section class="section with-background bg-variant">
         <header class="section-header stack gap-2 lg:gap-4">
-          <h3>Mentions</h3>
-          <p>
-            I have been fortunate enough to recieve praise for my work in
-            several publications. Take a look below to learn more.
-          </p>
+          <h3>Random Stats</h3>
+          <img src="/assets/metrics/github-metrics.svg" />
         </header>
-
-        <div class="gallery">
-          <Grid variant="small">
-            {
-              [
-                "Medium",
-                "BuzzFeed",
-                "The Next Web",
-                "awwwards.",
-                "TechCrunch",
-              ].map((brand) => (
-                <li class="mention-card">
-                  <p>{brand}</p>
-                </li>
-              ))
-            }
-          </Grid>
-        </div>
       </section>
       <section class="section with-background with-cta">
         <header class="section-header stack gap-2 lg:gap-4">
@@ -113,32 +92,32 @@ const projects = (await getCollection("blog"))
             }
           </Grid>
         </div>
-
-        <div class="cta">
-          <CallToAction href="/blog/">
-            View All
-            <Icon icon="arrow-right" size="1.2em" />
-          </CallToAction>
-        </div>
       </section>
+
+      <div class="cta">
+        <CallToAction href="/blog/">
+          View All
+          <Icon icon="arrow-right" size="1.2em" />
+        </CallToAction>
+      </div>
     </main>
   </div>
-  <script>
-    window.onload = function () {
-      var image = document.getElementById("face-img");
-
-      function updateImage() {
-        var bg =
-          "repeating-linear-gradient(transparent, transparent 1px, black 6px, black 6px), url(https://www.thispersondoesnotexist.com/?" +
-          new Date().getTime() +
-          ");";
-        image.style.background = bg;
-      }
-
-      setInterval(updateImage, 1000);
-    };
-  </script>
 </BaseLayout>
+<script>
+  window.onload = function () {
+    var image = document.getElementById("face-img");
+
+    function updateImage() {
+      var bg =
+        "repeating-linear-gradient(transparent, transparent 1px, black 6px, black 6px), url(https://www.thispersondoesnotexist.com/?" +
+        new Date().getTime() +
+        ");";
+      image.style.background = bg;
+    }
+
+    setInterval(updateImage, 1000);
+  };
+</script>
 
 <style>
   .hero {
