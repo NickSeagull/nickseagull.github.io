@@ -16,10 +16,13 @@ jobs:
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           output_action: none
-
-      - uses: NickSeagull/metrics@latest
-        with:
-          token: ${{ secrets.METRICS_TOKEN }}
+          config_timezone: "Atlantic/Canary"
+          # Generator config
+          base: header
+          plugin_isocalendar: yes
+          plugin_languages: yes
+          plugin_stars: yes
+          config_order: base.header, isocalendar, languages, stars
         run: |
           set +e
           git checkout metrics-renders
