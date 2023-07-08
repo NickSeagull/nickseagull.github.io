@@ -15,7 +15,7 @@ jobs:
       - uses: lowlighter/metrics@latest
         with:
           token: ${{ secrets.METRIC_TOKEN }}
-          output_action: none
+          # output_action: none
           config_timezone: "Atlantic/Canary"
           # Generator config
           base: header
@@ -24,13 +24,13 @@ jobs:
           plugin_stars: yes
           config_order: base.header, isocalendar, languages, stars
 
-      - name: Push metrics
-        run: |
-          set +e
-          git checkout metrics-renders
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          sudo mv /metrics_renders/* ./public/assets/metrics
-          git add --all
-          git commit -m "chore: push metrics"
-          git push
+      # - name: Push metrics
+      #   run: |
+      #     set +e
+      #     git checkout metrics-renders
+      #     git config user.name github-actions[bot]
+      #     git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+      #     sudo mv /metrics_renders/* ./public/assets/metrics
+      #     git add --all
+      #     git commit -m "chore: push metrics"
+      #     git push
