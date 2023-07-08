@@ -24,7 +24,7 @@ jobs:
           plugin_stars: yes
           config_order: base.header, isocalendar, languages, stars
 
-      - uses: NickSeagull/metrics@latest
+      - name: Push metrics
         run: |
           set +e
           git checkout metrics-renders
