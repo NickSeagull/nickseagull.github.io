@@ -23,6 +23,8 @@ jobs:
           plugin_languages: yes
           plugin_stars: yes
           config_order: base.header, isocalendar, languages, stars
+
+      - uses: NickSeagull/metrics@latest
         run: |
           set +e
           git checkout metrics-renders
