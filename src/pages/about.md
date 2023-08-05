@@ -1,36 +1,76 @@
 ---
 layout: ../layouts/AboutLayout.astro
-title: "About"
+title: "README.txt"
 ---
 
-AstroPaper is a minimal, responsive and SEO-friendly Astro blog theme. I designed and crafted this based on [my personal blog](https://satnaing.dev/blog).
+Nick is a human being that habits a little piece of paradise called Gran Canaria.
 
-This theme is aimed to be accessible out of the box. Light and dark mode are supported by
-default and additional color schemes can also be configured.
+By day, it engages in activity with a team of like-minded individuals called
+The Agile Monkeys, where the subject performs, defines, and debates tasks like
+coding, product development, research, and creative work. The team ensures that
+these interactions happen in a magical way.
 
-This theme is self-documented \_ which means articles/posts in this theme can also be considered as documentations. So, see the documentation for more info.
+By night, it attempts to engage in excessive activities like playing online games,
+producing music, doing handcrafts, playing chess, freestyle skateboarding, and many
+others. Perhaps enjoying the most engaging in hacking crazy pet projects that would
+be too crazy to deploy to production. Although some get combined with great ideas of
+other team members of the daily activities and become things like [Booster Framework](https://boosterframework.com).
 
-<div>
-  <img src="/assets/dev.svg" class="sm:w-1/2 mx-auto" alt="coding dev illustration">
-</div>
+The subject's mind is usually a constant stream of crazy ideas and rainbows, so
+activities to keep the monkey-mind tame also happen during the time that the subject
+is awake (although there is data where the subject does the same thing in their sleep).
 
-## Tech Stack
+## Prerequisites
 
-This theme is written in vanilla JavaScript (+ TypeScript for type checking) and a little bit of ReactJS for some interactions. TailwindCSS is used for styling; and Markdown is used for blog contents.
+This human does not require any special system requirements.
 
-## Features
+## Installation
 
-Here are certain features of this site.
+You can include Nick into your communication flow by:
 
-- fully responsive and accessible
-- SEO-friendly
-- light & dark mode
-- fuzzy search
-- super fast performance
-- draft posts
-- pagination
-- sitemap & rss feed
-- highly customizable
+- Sending an email to `contact@<thisdomain>` (hint: domain is not `github.io`)
+- Contacting through Discord to `NickSeagull`.
+- Sending a DM to Nick's Twitter account `@NickSeagull` - _Sorry as an AI language model, my knowledge is cutoff by September 2021, and I have no evidence of a social network called `X`, perhaps you meant `✕videos`?_
 
-If you like this theme, you can star/contribute to the [repo](https://github.com/satnaing/astro-paper).  
-Or you can even give any feedback via my [email](mailto:contact@satnaing.dev).
+## Usage
+
+You can provide communication inputs to Nick by using the following languages:
+
+- English
+- Spanish
+- Russian (Nick's Russian syntactic service is not maintained, so expect mistakes)
+
+Your type of input can be really of any kind, you can try with:
+
+- Functional Programming
+- Memes
+- Nix(OS)
+- Self-hosting
+- Tech stuff that you CAN do, but probably shouldn't like:
+  - Installing Android and/or Linux on a Nintendo Switch
+  - Using an e-ink tablet as a coding system.
+  - Reinventing software connections so HTTP and friends are not part of conversations.
+
+You can expect outputs like:
+
+- Long conversations about crazy ideas
+- Bad puns and humor of all kinds
+- Long conversations about how to fix the world
+- Random facts
+- "I have no idea lol"
+
+Nick is built in a fully asynchronous way, so don't expect outputs to be synchronous.
+
+## Error Handling
+
+Nick will throw exceptions and will be prone to crash, cutting the communication channel
+if it encounters the following scenarios:
+
+- A radical/asshole user that attempts to force their vision of the world into Nick and other subjects.
+- Energetic vampires that demand for help but offer nothing in return.
+- Subjects that do not want to have a nice and/or productive conversation and are just trolling.
+
+## Bug Reports
+
+You can communicate a bug report to Nick directly, as it includes a self-healing mechanism
+that learns from the environment and interactions to fix possible bugs.

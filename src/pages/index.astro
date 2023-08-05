@@ -14,7 +14,8 @@ import { SOCIALS } from "@config";
 const posts = await getCollection("blog");
 
 const sortedPosts = getSortedPosts(posts);
-const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
+// const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
+const featuredPosts = [] as unknown as any;
 
 const socialCount = SOCIALS.filter(social => social.active).length;
 ---
@@ -23,7 +24,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
   <Header />
   <main id="main-content">
     <section id="hero">
-      <h1>Mingalaba</h1>
+      <h1>sup</h1>
       <a
         target="_blank"
         href="/rss.xml"
@@ -40,19 +41,14 @@ const socialCount = SOCIALS.filter(social => social.active).length;
         </svg>
       </a>
 
+      <p>Welcome to Nick's rainbow garbage dump, you will find stuff*</p>
       <p>
-        AstroPaper is a minimal, responsive, accessible and SEO-friendly Astro
-        blog theme. This theme follows best practices and provides accessibility
-        out of the box. Light and dark mode are supported by default. Moreover,
-        additional color schemes can also be configured.
-      </p>
-      <p>
-        Read the blog posts or check
+        Read the stuff or check
         <LinkButton
           className="hover:text-skin-accent underline underline-offset-4 decoration-dashed"
-          href="https://github.com/satnaing/astro-paper#readme"
+          href="/about"
         >
-          README
+          README.txt
         </LinkButton> for more info.
       </p>
       {
@@ -64,29 +60,32 @@ const socialCount = SOCIALS.filter(social => social.active).length;
           </div>
         )
       }
+      <p style="font-size: 0.5rem;">
+        (* - quality of the stuff is not guaranteed.)
+      </p>
     </section>
 
     <Hr />
 
-    {
-      featuredPosts.length > 0 && (
-        <>
-          <section id="featured">
-            <h2>Featured</h2>
-            <ul>
-              {featuredPosts.map(({ data }) => (
-                <Card
-                  href={`/posts/${slugify(data)}`}
-                  frontmatter={data}
-                  secHeading={false}
-                />
-              ))}
-            </ul>
-          </section>
-          <Hr />
-        </>
-      )
-    }
+    <!-- { -->
+    <!--   featuredPosts.length > 0 && ( -->
+    <!--     <> -->
+    <!--       <section id="featured"> -->
+    <!--         <h2>Featured</h2> -->
+    <!--         <ul> -->
+    <!--           {featuredPosts.map(({ data }) => ( -->
+    <!--             <Card -->
+    <!--               href={`/posts/${slugify(data)}`} -->
+    <!--               frontmatter={data} -->
+    <!--               secHeading={false} -->
+    <!--             /> -->
+    <!--           ))} -->
+    <!--         </ul> -->
+    <!--       </section> -->
+    <!--       <Hr /> -->
+    <!--     </> -->
+    <!--   ) -->
+    <!-- } -->
 
     <section id="recent-posts">
       <h2>Recent Posts</h2>
