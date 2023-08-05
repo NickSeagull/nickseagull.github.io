@@ -60,13 +60,11 @@ const { activeNav } = Astro.props;
         <ul id="menu-items" class="display-none sm:flex">
           <li>
             <a href="/posts" class={activeNav === "posts" ? "active" : ""}>
-              Posts
+              Stuff
             </a>
           </li>
           <li>
-            <a href="/tags" class={activeNav === "tags" ? "active" : ""}>
-              Tags
-            </a>
+            <a href="javascript:void(0)" id="win-button"> Click here to win!</a>
           </li>
           <li>
             <a href="/about" class={activeNav === "about" ? "active" : ""}>
@@ -196,6 +194,12 @@ const { activeNav } = Astro.props;
   const menuBtn = document.querySelector(".hamburger-menu");
   const menuIcon = document.querySelector(".menu-icon");
   const menuItems = document.querySelector("#menu-items");
+
+  const winBtn = document.querySelector("#win-button");
+
+  winBtn?.addEventListener("click", () => {
+    alert("Congratulations! You won the opportunity to click again!");
+  });
 
   menuBtn?.addEventListener("click", () => {
     const menuExpanded = menuBtn.getAttribute("aria-expanded") === "true";
