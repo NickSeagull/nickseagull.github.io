@@ -6,7 +6,7 @@ import Tag from "@components/Tag.astro";
 import Datetime from "@components/Datetime";
 import { slugifyStr } from "@utils/slugify";
 import Markdown from "@astrojs/markdown-component";
-import fm from 'front-matter'
+import fm from "front-matter";
 
 export interface Props {
   post: any;
@@ -18,17 +18,19 @@ const {
   title,
   author,
   description,
-  ogImage,
-  canonicalURL,
+  cover_image,
+  canonical_url,
   published_at,
   tag_list,
   body_markdown,
 } = post;
 
-const postBody = fm(body_markdown).body
+const postBody = fm(body_markdown).body;
 
-const ogUrl = new URL(ogImage ? ogImage : `${title}.png`, Astro.url.origin)
-  .href;
+const ogUrl = new URL(
+  cover_image ? cover_image : `${title}.png`,
+  Astro.url.origin
+).href;
 ---
 
 <Layout
@@ -36,25 +38,16 @@ const ogUrl = new URL(ogImage ? ogImage : `${title}.png`, Astro.url.origin)
   author={author}
   description={description}
   ogImage={ogUrl}
-  canonicalURL={canonicalURL}
+  canonicalURL={canonical_url}
 >
   <Header />
-  <div class="mx-auto flex w-full max-w-3xl justify-start px-2">
-    <button
-      class="focus-outline mb-2 mt-8 flex hover:opacity-75"
-      onclick="
-      history.back()
-      "
-    >
-      <svg xmlns="http://www.w3.org/2000/svg"
-        ><path
-          d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"
-        ></path>
-      </svg><span>Go back</span>
-    </button>
-  </div>
   <main id="main-content">
+    <img src={ogUrl} />
     <h1 class="post-title">{title}</h1>
+    <p>
+      This article was originally posted on <a href={canonical_url}
+        ><u>DEV.to</u></a>
+    </p>
     <Datetime datetime={published_at} size="lg" className="my-2" />
     <article id="article" role="article" class="prose mx-auto mt-8 max-w-3xl">
       <Markdown content={postBody} />
