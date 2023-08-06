@@ -1,4 +1,4 @@
-name: Metrics
+name: Publish
 on:
   # Schedule daily updates
   schedule: [{ cron: "0 0 * * *" }]
@@ -13,40 +13,7 @@ permissions:
   id-token: write
 
 jobs:
-  github-metrics:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: lowlighter/metrics@latest
-        with:
-          token: ${{ secrets.METRIC_TOKEN }}
-          # output_action: none
-          config_timezone: "Atlantic/Canary"
-          extras_css: |
-            * {
-              color: #3d4663;
-            }
-          # Generator config
-          config_order: skyline, chess, languages, activity, achievements
-
-          plugin_languages: yes
-
-          plugin_achievements: yes
-
-          plugin_chess: yes
-          plugin_chess_token: ${{ secrets.CHESS_TOKEN }}
-          plugin_chess_user: "NickSeagull"
-          plugin_chess_platform: lichess.org
-
-          plugin_skyline: yes
-          plugin_skyline_frames: 120
-          plugin_skyline_quality: 0.8
-
-          plugin_activity: yes
-
   build:
-    needs: github-metrics
     runs-on: ubuntu-latest
     steps:
       - name: Checkout your repository using git
