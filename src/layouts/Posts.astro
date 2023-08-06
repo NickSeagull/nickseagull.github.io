@@ -12,7 +12,7 @@ import type { CollectionEntry } from "astro:content";
 export interface Props {
   pageNum: number;
   totalPages: number;
-  posts: CollectionEntry<"blog">[];
+  posts: any[];
 }
 
 const { pageNum, totalPages, posts } = Astro.props;
@@ -21,13 +21,21 @@ const prev = pageNum > 1 ? "" : "disabled";
 const next = pageNum < totalPages ? "" : "disabled";
 ---
 
-<Layout title={`Posts | ${SITE.title}`}>
+<Layout title={`stuff | ${SITE.title}`}>
   <Header activeNav="posts" />
-  <Main pageTitle="Posts" pageDesc="All the articles I've posted.">
+  <Main pageTitle="Posts" pageDesc="All the stuff I've posted.">
     <ul>
       {
-        posts.map(({ data }) => (
-          <Card href={`/posts/${slugify(data)}`} frontmatter={data} />
+        posts.map(article => (
+          <Card
+            href={`/posts/${article.slug}`}
+            frontmatter={{
+              title: article.title,
+              description: article.description,
+              pubDatetime: article.published_at,
+              tags: article.tags,
+            }}
+          />
         ))
       }
     </ul>
