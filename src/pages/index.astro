@@ -1,264 +1,146 @@
 ---
 import { getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import LinkButton from "@components/LinkButton.astro";
+import Hr from "@components/Hr.astro";
+import Card from "@components/Card";
+import Socials from "@components/Socials.astro";
+import getSortedPosts from "@utils/getSortedPosts";
+import slugify from "@utils/slugify";
+import { SOCIALS } from "@config";
+import { getArticles } from "@utils/getArticles";
 
-// Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
-import BaseLayout from "../layouts/BaseLayout.astro";
+// const posts = await getCollection("blog");
 
-// Component Imports
-import CallToAction from "../components/CallToAction.astro";
-import Grid from "../components/Grid.astro";
-import Hero from "../components/Hero.astro";
-import Icon from "../components/Icon.astro";
-import Pill from "../components/Pill.astro";
-import PortfolioPreview from "../components/PortfolioPreview.astro";
+const sortedPosts = await getArticles();
 
-// Page section components
-import Skills from "../components/Skills.astro";
-import "../styles/glitch.css";
+// const sortedPosts = getSortedPosts(posts);
+// const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
+const featuredPosts = [] as unknown as any;
 
-// Content Fetching: List four most recent work projects
-const projects = (await getCollection("blog"))
-  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-  .slice(0, 4);
-
-// Full Astro Component Syntax:
-// https://docs.astro.build/core-concepts/astro-components/
+const socialCount = SOCIALS.filter(social => social.active).length;
 ---
 
-<BaseLayout>
-  <div class="stack gap-20 lg:gap-48">
-    <div class="wrapper stack gap-8 lg:gap-20">
-      <header class="hero">
-        <Hero
-          title="yo, I'm Nick"
-          tagline="I'm still figuring out stuff"
-          align="start"
+<Layout>
+  <Header />
+  <main id="main-content">
+    <section id="hero">
+      <h1>As an AI language model</h1>
+      <a
+        target="_blank"
+        href="/rss.xml"
+        class="rss-link"
+        aria-label="rss feed"
+        title="RSS Feed"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="rss-icon"
+          ><path
+            d="M19 20.001C19 11.729 12.271 5 4 5v2c7.168 0 13 5.832 13 13.001h2z"
+          ></path><path
+            d="M12 20.001h2C14 14.486 9.514 10 4 10v2c4.411 0 8 3.589 8 8.001z"
+          ></path><circle cx="6" cy="18" r="2"></circle>
+        </svg>
+      </a>
+
+      <p>I welcome you to Nick's rainbow garbage dump, you will find stuff*</p>
+      <p>
+        Read the stuff* or check
+        <LinkButton
+          className="hover:text-skin-accent underline underline-offset-4 decoration-dashed"
+          href="/about"
         >
-          <div class="roles">
-            <Pill>
-              <Icon icon="code" size="1.33em" /><a
-                href="https://en.wikipedia.org/wiki/Hacker_culture"
-                style="color: white">Hacker</a
-              >
-            </Pill>
-            <Pill><Icon icon="microphone-stage" size="1.33em" /> AAAA</Pill>
-            <Pill><Icon icon="pencil-line" size="1.33em" /> BBBB</Pill>
+          README.txt
+        </LinkButton> for more info.
+      </p>
+      {
+        // only display if at least one social link is enabled
+        socialCount > 0 && (
+          <div class="social-wrapper">
+            <div class="social-links">Communicate.</div>
+            <Socials />
           </div>
-        </Hero>
+        )
+      }
+      <p style="font-size: 0.5rem;">
+        (* quality of the stuff is not guaranteed.)
+      </p>
+    </section>
 
-        <div>
-          <div class="glitch">
-            <img id="face-img" width="480" height="620" src="" />
+    <Hr />
 
-            <div class="glitch__layers">
-              <div class="glitch__layer"></div>
-              <div class="glitch__layer"></div>
-              <div class="glitch__layer"></div>
-            </div>
-          </div>
-          <a href="https://www.thispersondoesnotexist.com/"
-            >This person does not exist.</a
-          >
-        </div>
-      </header>
-
-      <Skills />
-    </div>
-
-    <main class="wrapper stack gap-20 lg:gap-48">
-      <section class="section with-background bg-variant">
-        <header class="section-header stack gap-2 lg:gap-4">
-          <h3>Random Stats</h3>
-          <img src="/assets/metrics/github-metrics.svg" />
-        </header>
-      </section>
-      <section class="section with-background with-cta">
-        <header class="section-header stack gap-2 lg:gap-4">
-          <h3>Work</h3>
-          <p>
-            Take a look below at some of my fake work for clients that do not
-            exist from the past few eons.
-          </p>
-        </header>
-
-        <div class="gallery">
-          <Grid variant="offset">
-            {
-              projects.map((project) => (
-                <li>
-                  <PortfolioPreview project={project} />
-                </li>
-              ))
-            }
-          </Grid>
-        </div>
-      </section>
-
-      <div class="cta">
-        <CallToAction href="/blog/">
-          View All
-          <Icon icon="arrow-right" size="1.2em" />
-        </CallToAction>
+    <section id="recent-posts">
+      <h2>recent stuff</h2>
+      <ul>
+        {
+          sortedPosts.map(
+            (article: any, index: number) =>
+              index < 4 && (
+                <Card
+                  href={`/posts/${article.slug}`}
+                  frontmatter={{
+                    title: article.title,
+                    description: article.description,
+                    pubDatetime: article.published_at,
+                    tags: article.tags,
+                  }}
+                  secHeading={false}
+                />
+              )
+          )
+        }
+      </ul>
+      <div class="all-posts-btn-wrapper">
+        <LinkButton href="/posts">
+          All Posts
+          <svg xmlns="http://www.w3.org/2000/svg"
+            ><path
+              d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
+            ></path>
+          </svg>
+        </LinkButton>
       </div>
-    </main>
-  </div>
-</BaseLayout>
-<script>
-  window.onload = function () {
-    var image = document.getElementById("face-img");
+    </section>
+  </main>
 
-    function updateImage() {
-      var bg =
-        "repeating-linear-gradient(transparent, transparent 1px, black 6px, black 6px), url(https://www.thispersondoesnotexist.com/?" +
-        new Date().getTime() +
-        ");";
-      image.style.background = bg;
-    }
-
-    setInterval(updateImage, 1000);
-  };
-</script>
+  <Footer />
+</Layout>
 
 <style>
-  .hero {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
+  /* ===== Hero Section ===== */
+  #hero {
+    @apply pb-6 pt-8;
+  }
+  #hero h1 {
+    @apply my-4 inline-block text-3xl font-bold sm:my-8 sm:text-5xl;
+  }
+  #hero .rss-link {
+    @apply mb-6;
+  }
+  #hero .rss-icon {
+    @apply mb-2 h-6 w-6 scale-110 fill-skin-accent sm:mb-3 sm:scale-125;
+  }
+  #hero p {
+    @apply my-2;
+  }
+  .social-wrapper {
+    @apply mt-4 flex flex-col sm:flex-row sm:items-center;
+  }
+  .social-links {
+    @apply mb-1 mr-2 whitespace-nowrap sm:mb-0;
   }
 
-  .roles {
-    display: none;
+  /* ===== Featured & Recent Posts Sections ===== */
+  #featured,
+  #recent-posts {
+    @apply pb-6 pt-12;
   }
-
-  .hero img {
-    aspect-ratio: 5 / 4;
-    object-fit: cover;
-    object-position: top;
-    border-radius: 1.5rem;
-    box-shadow: var(--shadow-md);
+  #featured h2,
+  #recent-posts h2 {
+    @apply text-2xl font-semibold tracking-wide;
   }
-
-  @media (min-width: 50em) {
-    .hero {
-      display: grid;
-      grid-template-columns: 6fr 4fr;
-      padding-inline: 2.5rem;
-      gap: 3.75rem;
-    }
-
-    .roles {
-      margin-top: 0.5rem;
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .hero img {
-      aspect-ratio: 3 / 4;
-      border-radius: 4.5rem;
-      object-fit: cover;
-    }
-  }
-
-  /* ====================================================== */
-
-  .section {
-    display: grid;
-    gap: 2rem;
-  }
-
-  .with-background {
-    position: relative;
-  }
-
-  .with-background::before {
-    --hero-bg: var(--bg-image-subtle-2);
-
-    content: "";
-    position: absolute;
-    pointer-events: none;
-    left: 50%;
-    width: 100vw;
-    aspect-ratio: calc(2.25 / var(--bg-scale));
-    top: 0;
-    transform: translateY(-75%) translateX(-50%);
-    background: url("/assets/backgrounds/noise.png") top center/220px repeat,
-      var(--hero-bg) center center / var(--bg-gradient-size) no-repeat,
-      var(--gray-999);
-    background-blend-mode: overlay, normal, normal, normal;
-    mix-blend-mode: var(--bg-blend-mode);
-    z-index: -1;
-  }
-
-  .with-background.bg-variant::before {
-    --hero-bg: var(--bg-image-subtle-1);
-  }
-
-  .section-header {
-    justify-self: center;
-    text-align: center;
-    max-width: 50ch;
-    font-size: var(--text-md);
-    color: var(--gray-300);
-  }
-
-  .section-header h3 {
-    font-size: var(--text-2xl);
-  }
-
-  @media (min-width: 50em) {
-    .section {
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-areas: "header header header header" "gallery gallery gallery gallery";
-      gap: 5rem;
-    }
-
-    .section.with-cta {
-      grid-template-areas: "header header header cta" "gallery gallery gallery gallery";
-    }
-
-    .section-header {
-      grid-area: header;
-      font-size: var(--text-lg);
-    }
-
-    .section-header h3 {
-      font-size: var(--text-4xl);
-    }
-
-    .with-cta .section-header {
-      justify-self: flex-start;
-      text-align: left;
-    }
-
-    .gallery {
-      grid-area: gallery;
-    }
-
-    .cta {
-      grid-area: cta;
-    }
-  }
-
-  /* ====================================================== */
-
-  .mention-card {
-    display: flex;
-    height: 7rem;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    border: 1px solid var(--gray-800);
-    border-radius: 1.5rem;
-    color: var(--gray-300);
-    background: var(--gradient-subtle);
-    box-shadow: var(--shadow-sm);
-  }
-
-  @media (min-width: 50em) {
-    .mention-card {
-      border-radius: 1.5rem;
-      height: 9.5rem;
-    }
+  .all-posts-btn-wrapper {
+    @apply my-8 text-center;
   }
 </style>
