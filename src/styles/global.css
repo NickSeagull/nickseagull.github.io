@@ -1,492 +1,149 @@
-@tailwind base;
+@import 'tailwindcss';
 
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-sans: Geist Sans, ui-sans-serif, system-ui, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-mono: Geist Mono, ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
 @layer base {
-  :root {
-    --color-primary: 75 38 143; /* 135 94 212 */
-    --color-secondary: 107 154 199;
-    --color-accent: 119 112 150;
-    --color-warning: 202 121 45;
-    --color-danger: 180 25 14;
-    --color-success: 77 137 101;
-    --color-dark: 25 28 38;
-    --color-light: 243 241 239;
-    --color-info: 25 28 38;
-
-    --spacing: 1rem;
-    --w-xl: 75rem;
-    --w-lg: 65rem;
-    --w-md: 55rem;
-    --w-sm: 40rem;
-    --w-container: 55rem;
-
-    --popper-theme-background-color: theme(colors.primary);
-    --popper-theme-background-color-hover: theme(colors.primary);
-    --popper-theme-text-color: theme(colors.light);
-    --popper-theme-border-width: 0px;
-    --popper-theme-border-style: solid;
-    --popper-theme-border-radius: 0.2rem;
-    --popper-theme-padding: 0.4rem;
-    --popper-theme-box-shadow: 0 6px 30px -6px rgba(0, 0, 0, 0.25);
-  }
-
-  [data-theme="dark"] {
-    body {
-      --color-primary: 135 94 212;
-      --color-secondary: 107 154 199;
-      --color-accent: 119 112 150;
-      --color-warning: 202 121 45;
-      --color-danger: 180 25 14;
-      --color-success: 77 137 101;
-      --color-dark: 25 28 38;
-      --color-light: 243 241 239;
-      --color-info: 25 28 38;
-    }
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
   }
 }
 
-/* SURFACES */
+@layer utilities {
+  html {
+    overflow-y: auto;
+    color-scheme: light;
+    scroll-padding-top: 100px;
+  }
 
-body {
-  --toastify-color-light: theme(colors.light);
-  --toastify-color-dark: theme(colors.dark);
-  --toastify-color-info: theme(colors.primary);
-  --toastify-color-success: theme(colors.primary);
-  --toastify-color-warning: theme(colors.warning);
-  --toastify-color-error: theme(colors.danger);
-}
+  html.dark {
+    color-scheme: dark;
+  }
 
-.surface-base {
-  @apply bg-light text-dark dark:bg-dark dark:text-light;
-}
+  html,
+  body {
+    @apply size-full;
+  }
 
-.surface-primary {
-  @apply bg-primary text-white dark:text-white;
-  a:not([class]) {
-    @apply text-light;
+  body {
+    @apply font-sans antialiased;
+    @apply flex flex-col;
+    @apply bg-neutral-100 dark:bg-neutral-900;
+    @apply text-black/75 dark:text-white/75;
+  }
+
+  header {
+    @apply fixed left-0 right-0 top-0 z-50 py-6;
+    @apply bg-neutral-100/75 dark:bg-neutral-900/75;
+    @apply saturate-200 backdrop-blur-xs;
+  }
+
+  main {
+    @apply flex-1 py-32;
+  }
+
+  footer {
+    @apply py-6 text-sm;
+  }
+
+  article {
+    @apply prose prose-neutral max-w-full dark:prose-invert prose-img:mx-auto prose-img:my-auto;
+    @apply prose-headings:font-semibold;
+    @apply prose-headings:text-black dark:prose-headings:text-white;
   }
 }
 
-.surface-secondary {
-  @apply bg-secondary text-dark;
-  a:not([class]) {
-    @apply text-dark;
+@layer utilities {
+  article a {
+    @apply font-sans text-current underline underline-offset-[3px];
+    @apply decoration-black/30 dark:decoration-white/30;
+    @apply transition-colors duration-300 ease-in-out;
   }
-}
-.surface-accent {
-  @apply bg-accent text-light;
-  a:not([class]) {
-    @apply text-light;
-  }
-}
-.surface-warning {
-  @apply bg-warning text-light;
-  a:not([class]) {
-    @apply text-light;
-  }
-}
-.surface-danger {
-  @apply bg-danger text-light;
-  a:not([class]) {
-    @apply text-light;
-  }
-}
-.surface-overlay {
-  @apply bg-white text-dark dark:bg-black dark:text-light;
-}
-.surface-overlay-hover {
-  @apply relative text-dark before:absolute before:inset-0 before:rounded-md before:opacity-0 before:shadow-inset before:transition-opacity before:duration-500 hover:before:opacity-100 dark:text-light dark:before:shadow-gray-500;
-}
-.surface-overlay-hover-btn {
-  @apply relative text-dark before:absolute before:inset-0 before:rounded-md before:opacity-50 before:shadow-inset before:transition-opacity before:duration-500 hover:before:opacity-100 dark:text-light dark:before:shadow-gray-500;
-}
-
-.surface-dark {
-  @apply bg-dark text-light dark:bg-black;
-}
-
-.surface-footer {
-  @apply bg-dark bg-opacity-80 text-light;
-}
-
-.surface-menu {
-  @apply bg-light bg-opacity-90 text-primary  dark:bg-dark dark:bg-opacity-90;
-  .nav-links {
-    @apply text-dark dark:text-white;
+  article a:hover {
+    @apply text-black dark:text-white;
+    @apply decoration-black/50 dark:decoration-white/50;
   }
 }
 
-.surface-light {
-  @apply bg-light text-dark;
-}
-.surface-success {
-  @apply bg-success text-light;
-  a:not([class]) {
-    @apply text-light;
-  }
-}
-.surface-info {
-  @apply bg-info text-light;
-  a:not([class]) {
-    @apply text-light;
-  }
+.animate {
+  @apply -translate-y-3 opacity-0;
+  @apply transition-all duration-300 ease-out;
 }
 
-@font-face {
-  font-family: "Adjusted Arial Fallback";
-  src: local(Arial);
-  size-adjust: 105%;
-  ascent-override: normal;
-  descent-override: normal;
-  line-gap-override: normal;
+.animate.show {
+  @apply translate-y-0 opacity-100;
 }
 
-/* BASE ELEMENTS */
-body {
-  @screen xs {
-    --spacing: 2rem;
-  }
-  font-family: "Inter Tight Variable", "Adjusted Arial Fallback", "arial",
-    sans-serif;
-  --container-spacing: calc(var(--spacing) * 2);
-  --grid-spacing: calc(var(--spacing) / 2);
-}
-
-.container {
-  width: min(100% - var(--container-spacing), var(--w-md));
-  @apply mx-auto;
-  &-xl {
-    width: min(100% - var(--container-spacing), var(--w-xl));
-    @apply mx-auto;
-  }
-
-  &-lg {
-    width: min(100% - var(--container-spacing), var(--w-lg));
-    @apply mx-auto;
-  }
-  &-md {
-    width: min(100% - var(--container-spacing), var(--w-md));
-    @apply mx-auto;
-  }
-  &-sm {
-    width: min(100% - var(--container-spacing), var(--w-sm));
-    @apply mx-auto;
-  }
-  &-full {
-    width: calc(100% - var(--container-spacing));
-    @apply mx-auto;
-  }
-}
-
-.auto-grid {
-  @apply grid;
-  &-sm {
-    gap: var(--grid-spacing);
-    @apply grid sm:grid-cols-2;
-  }
-
-  &-md {
-    gap: var(--grid-spacing);
-    @apply grid sm:grid-cols-2 md:grid-cols-3;
-  }
-
-  &-lg {
-    gap: var(--grid-spacing);
-    @apply grid sm:grid-cols-2	md:grid-cols-3;
-  }
-
-  &-xl {
-    gap: var(--grid-spacing);
-    @apply grid sm:grid-cols-2	md:grid-cols-3 lg:grid-cols-4;
-  }
-
-  &-full {
-    gap: var(--grid-spacing);
-    @apply grid xs:grid-cols-2	md:grid-cols-3 lg:grid-cols-4  2xl:grid-cols-5;
-  }
-
-  &-none {
-    gap: var(--grid-spacing);
-    @apply grid xs:grid-cols-2	md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6;
-  }
-}
-
-.hide-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-/* POPPER */
-
-.popper {
-  transition: background 250ms ease-in-out;
-  background: var(--popper-theme-background-color);
-  padding: var(--popper-theme-padding);
-  color: var(--popper-theme-text-color);
-  border-radius: var(--popper-theme-border-radius);
-  border-width: var(--popper-theme-border-width);
-  border-style: var(--popper-theme-border-style);
-  border-color: var(--popper-theme-border-color);
-  box-shadow: var(--popper-theme-box-shadow);
-  z-index: v-bind(zIndex);
-}
-
-.popper:hover,
-.popper:hover > #arrow::before {
-  background: var(--popper-theme-background-color-hover);
-}
-/* MARKDOWN HTML */
-.richtext {
-  a:not([class]) {
-    padding-bottom: 0.1em;
-    background: linear-gradient(90deg, currentColor, currentColor) no-repeat
-      right bottom / 0 var(--bg-h);
-    transition: background-size 350ms;
-    --bg-h: 0.1em;
-
-    &:where(:hover, :focus-visible) {
-      background-size: 100% var(--bg-h);
-      background-position-x: left;
-    }
-  }
-  &:not(.dense) {
-    * + p {
-      @apply pt-4;
-    }
-  }
-
-  p {
-    @apply text-lg;
-  }
-  &:not(.no-lead) {
-    p:first-of-type {
-      @apply text-xl;
-    }
-  }
-
-  * + *:is(h2, h3, h4, h5, h6) {
-    @apply pt-8;
-  }
-
-  h2 {
-    @apply text-3xl font-extrabold sm:text-4xl;
-    text-wrap: balance;
-    strong {
-      @apply block text-xs font-light uppercase tracking-widest;
-    }
-  }
-
-  h3 {
-    @apply text-2xl font-extrabold sm:text-3xl;
-    text-wrap: balance;
-  }
-  h4 {
-    @apply text-xl font-bold sm:text-2xl;
-    text-wrap: balance;
-  }
-  h5 {
-    @apply text-lg font-bold leading-none sm:text-xl;
-    text-wrap: balance;
-  }
-
-  h6 {
-    @apply text-lg font-bold leading-none;
-    text-wrap: balance;
-  }
-  p {
-    text-wrap: balance;
-  }
-
-  table {
-    @apply my-8 w-full;
-  }
-
-  code {
-    @apply rounded-md bg-gray-600 bg-opacity-20 px-1 py-0.5;
-  }
-  pre {
-    @apply my-4 inline-block w-full max-w-full rounded-md p-4;
-  }
-  pre > code {
-    all: unset;
-  }
-  blockquote {
-    @apply mx-0 my-8 border-l-4 border-primary py-0 pl-8 pr-0 text-2xl font-semibold italic;
-  }
-  ul:not([class]) {
-    @apply list-disc;
-  }
-  ol:not([class]) {
-    @apply list-decimal;
-  }
-
-  ul:not([class]),
-  ol:not([class]) {
-    @apply my-8 ml-6 list-outside text-lg leading-tight;
-
-    li {
-      @apply py-2;
-      text-wrap: balance;
-      &::marker {
-        @apply text-primary;
-      }
-    }
-    ul,
-    ol {
-      @apply my-1 ml-4;
-    }
-  }
-}
-
-/* TYPOGRAFY */
-
-.title {
-  @apply text-4xl font-extrabold sm:text-6xl md:text-5xl lg:text-7xl;
-  text-wrap: balance;
-
-  &-md {
-    @apply text-2xl font-extrabold sm:text-4xl md:text-5xl lg:text-5xl;
-    text-wrap: balance;
-  }
-  &-sm {
-    @apply text-3xl font-extrabold sm:text-4xl;
-    text-wrap: balance;
-  }
-}
-
-.subtitle {
-  @apply text-2xl;
-}
-
-.text-overline {
-  @apply uppercase tracking-widest;
-}
-
-.balance {
-  text-wrap: balance;
-}
-
-.lead {
-  @apply text-lg;
-}
-
-/* BUTTONS */
-
-.btn {
-  @apply inline-flex gap-2 rounded-full px-4 py-2 uppercase outline-offset-4 transition-all duration-300 hover:-translate-y-0.5  hover:bg-opacity-90 hover:shadow-md disabled:pointer-events-none disabled:opacity-50 disabled:grayscale;
-
-  &-icon {
-    @apply px-2;
-  }
-  &-absolute {
-    @apply absolute;
-  }
-}
-
-a.link-underline {
-  padding-bottom: 0.1em;
-  background: linear-gradient(90deg, currentColor, currentColor) no-repeat right
-    bottom / 0 var(--bg-h);
-  transition: background-size 350ms;
-  --bg-h: 0.1em;
-
-  &:where(:hover, :focus-visible) {
-    background-size: 100% var(--bg-h);
-    background-position-x: left;
-  }
-}
-
-/* ANIMATIONS */
-@media screen and (prefers-reduced-motion: no-preference) {
-  .fade-up {
-    @apply ease-in;
-    transition: all 0.5s var(--animation-delay, 0ms);
-  }
-
-  .fade-in {
-    transition: opacity 0.5s var(--animation-delay, 0ms);
-  }
-
-  .is-inactive {
-    &.fade-up,
-    .fade-up {
-      @apply scale-95;
-    }
-  }
-
-  .out-of-screen {
-    &.fade-up,
-    .fade-up {
-      @apply scale-95 opacity-90;
-    }
-    &.fade-in,
-    .fade-in {
-      @apply opacity-0;
-    }
-  }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-/* NAVIGATION */
-
-.btn-to-top {
+html #back-to-top {
   @apply pointer-events-none opacity-0;
 }
 
-[data-is-top="false"] {
-  .btn-to-top {
-    @apply pointer-events-auto scale-100 opacity-100;
-  }
-  .add-to-cart-spacer {
-    @apply w-12;
-  }
+html.scrolled #back-to-top {
+  @apply pointer-events-auto opacity-100;
 }
 
-.attribution {
-  @apply opacity-100 transition-all duration-1000;
+/* shiki config */
+pre {
+  @apply border border-black/15 py-5 dark:border-white/20;
 }
 
-[data-is-bottom="false"] {
-  .attribution {
-    @apply opacity-0;
-  }
+:root {
+  --astro-code-foreground: #09090b;
+  --astro-code-background: #fafafa;
+  --astro-code-token-comment: #a19595;
+  --astro-code-token-keyword: #f47067;
+  --astro-code-token-string: #00a99a;
+  --astro-code-token-function: #429996;
+  --astro-code-token-constant: #2b70c5;
+  --astro-code-token-parameter: #4e8fdf;
+  --astro-code-token-string-expression: #ae42a0;
+  --astro-code-token-punctuation: #8996a3;
+  --astro-code-token-link: #8d85ff;
 }
 
-[data-is-bottom="true"] {
-  .attribution {
-    @apply opacity-100 delay-500;
-  }
+.dark {
+  --astro-code-foreground: #fafafa;
+  --astro-code-background: #09090b;
+  --astro-code-token-comment: #a19595;
+  --astro-code-token-keyword: #f47067;
+  --astro-code-token-string: #00a99a;
+  --astro-code-token-function: #6eafad;
+  --astro-code-token-constant: #b3cceb;
+  --astro-code-token-parameter: #4e8fdf;
+  --astro-code-token-string-expression: #bf7db6;
+  --astro-code-token-punctuation: #8996a3;
+  --astro-code-token-link: #8d85ff;
 }
 
-/* PAGEFIND */
-
-.search-modal {
-  --pagefind-ui-scale: 1.1;
-  --pagefind-ui-primary: theme(colors.light);
-  --pagefind-ui-fade: theme(colors.light / 0.3);
-  --pagefind-ui-text: theme(colors.light);
-  --pagefind-ui-background: theme(colors.primary);
-  --pagefind-ui-border: theme(colors.light / 0.3);
-  --pagefind-ui-tag: theme(colors.light / 0.3);
-  --pagefind-ui-border-width: 0;
-  --pagefind-ui-border-radius: 2rem;
-  --pagefind-ui-image-border-radius: 0.5rem;
-  --pagefind-ui-image-box-ratio: 1;
-  --pagefind-ui-font: inherit;
+/* copy code button on codeblocks */
+.copy-code {
+  @apply absolute right-3 top-3 grid size-9 place-content-center rounded-sm border border-black/15 bg-neutral-100 text-center duration-300 ease-in-out dark:border-white/20 dark:bg-neutral-900;
 }
 
-[data-is-scrolling-up="false"][data-is-top="false"] {
-  .nav {
-    @apply -translate-y-full;
-  }
+.copy-code:hover {
+  @apply bg-[#E9E9E9] transition-colors dark:bg-[#232323];
+}
+
+.copy-code:active {
+  @apply scale-90 transition-transform;
 }
