@@ -31,7 +31,11 @@ const allProjects: CollectionEntry<"projects">[] = (
       </div>
     </div>
   </div>
-  {allProjects.map((project) => <Card entry={project} />)}
+  {
+    allProjects
+      .sort((a, b) => (a.id > b.id ? 1 : -1))
+      .map((project) => <Card entry={project} />)
+  }
 </section>
 
 <style>
