@@ -5,7 +5,7 @@ import { getCollection, type CollectionEntry } from "astro:content";
 
 const allProjects: CollectionEntry<"projects">[] = (
   await getCollection("projects")
-).slice(0, 3);
+).slice(0, 4);
 ---
 
 <section id="Projects" class="container mx-auto px-6">
@@ -33,7 +33,7 @@ const allProjects: CollectionEntry<"projects">[] = (
   </div>
   {
     allProjects
-      .sort((a, b) => (a.id > b.id ? 1 : -1))
+      .sort((a, b) => (a.id.substring(0, 2) > b.id.substring(0, 2) ? 1 : -1))
       .map((project) => <Card entry={project} />)
   }
 </section>

@@ -13,6 +13,10 @@ const allProjects: CollectionEntry<"projects">[] =
     <h2 class="heading text-5xl md:text-9xl uppercase mr-4 md:mr-8 my-8">
       work
     </h2>
-    {allProjects.map((project) => <Card entry={project} />)}
+    {
+      allProjects
+        .sort((a, b) => (a.id.substring(0, 2) > b.id.substring(0, 2) ? 1 : -1))
+        .map((project) => <Card entry={project} />)
+    }
   </section>
 </Layout>
