@@ -1,6 +1,6 @@
 ---
 title: "NeoHaskell"
-description: "A Haskell dialect designed for AI-ready systems development, prioritizing developer happiness and productivity while maintaining functional programming power."
+description: "An AI-ready Haskell dialect, prioritizing developer happiness and productivity while allowing to deploy high-performant systems."
 image: {
 url: "/neohaskell.png",
 alt: "NeoHaskell thumbnail"
@@ -9,7 +9,7 @@ alt: "NeoHaskell thumbnail"
 
 ## Overview
 
-**NeoHaskell** is a dialect of Haskell that reimagines functional programming for the modern era, specifically designed to build AI-ready systems from the ground up. The language removes accidental complexity while preserving the mathematical elegance of Haskell, making it accessible to developers regardless of their functional programming background. It represents a fundamental rethinking of how programming languages should evolve to support both human developers and AI-powered development tools.
+**NeoHaskell** is a dialect of Haskell that reimagines functional programming for the modern era, specifically designed to build AI-ready systems from the ground up. The language removes accidental complexity while preserving the syntactical elegance of Haskell, making it accessible to developers regardless of their programming background. It represents a fundamental rethinking of how programming languages should evolve to support both human developers and AI-powered development tools.
 
 ## Features
 
