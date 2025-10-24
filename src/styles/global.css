@@ -8,7 +8,8 @@
   --font-geist: "Geist", sans-serif;
 
   /* colors */
-  --color-primary: oklch(86.89 0.29 142.02); /* #27FF0B*/
+  /* oklch(86.89 0.29 142.02); /* #27FF0B*/
+  --color-primary: oklch(0.5798 0.2111 280.75); /* #6a60f1 */
   --color-background: oklch(99.7 0 0); /* #fefefe */
   --color-foreground: oklch(0 0 0); /* #000000 */
   --color-secondary: oklch(0.38 0 1); /* #434343*/
