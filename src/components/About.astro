@@ -1,33 +1,63 @@
-<section id="About" class="container mx-auto mb-28 p-6">
-  <h2 class="heading text-5xl md:text-9xl uppercase">What's in for you</h2>
-  <div class="grid grid-cols-1 md:grid-cols-2 items-center md:p-0 gap-8">
-    <div class="space-y-6">
-      <div
-        class="w-full aspect-[668/516] md:max-w-[668px] overflow-hidden rounded-3xl"
-      >
-        <img
-          src="/portrait.webp"
-          alt="About Me Image"
-          class="w-full h-full object-cover"
-        />
-      </div>
-    </div>
-
+<section id="About" class="container mx-auto mt-16 mb-28 p-6">
+  <h2 class="heading text-5xl md:text-9xl uppercase mb-12">
+    What's in for you
+  </h2>
+  <div class="grid grid-cols-1 md:grid-cols-1 items-center md:p-0 gap-8">
     <div>
       <div class="text-lg md:text-2xl text-secondary space-y-4">
         <p>
-          I'm a full-stack developer with a strong focus on building fast,
-          accessible, and maintainable web applications. Over the past 6 years,
-          I’ve worked on high-traffic production systems, internal tools for
-          startups, and indie products used by thousands......
+          <strong
+            >It seems like you're watching competitors launch AI features while
+            your team debates whether to use OpenAI or Claude, how to handle
+            rate limits, and if vector databases are even necessary.</strong
+          >
         </p>
         <p>
-          I specialize in JavaScript, TypeScript, and modern frameworks like
-          Astro, React, and Svelte — but I’m most passionate about writing
-          clean, resilient code that scales.
+          <b>"...if vector databases are even necessary?"</b>
+        </p>
+        <p>
+          Exactly. These aren't trivial decisions. When your RAG system needs to
+          search through 100,000 documents in under 200ms, the difference
+          between Pinecone and PGVector isn't philosophical - it's whether your
+          users wait 2 seconds or give up. When your LLM costs hit
+          $50,000/month, knowing how to implement semantic caching and
+          intelligent batching becomes the difference between a sustainable
+          product and a cancelled project.
+        </p>
+        <p>
+          <strong>
+            Would it be terrible to have someone who's already made these
+            expensive mistakes on someone else's budget?
+          </strong>
+        </p>
+        <p>
+          Your team gets production-ready architectures that handle real issues:
+          automatic fallbacks when OpenAI goes down (it will), token
+          optimization that cuts costs by 60% without sacrificing quality, and
+          hybrid search that actually returns relevant results instead of
+          semantic nonsense. Your stakeholders get demos they can understand,
+          not lectures about embeddings.
+        </p>
+        <p>
+          <strong>
+            How much would it be worth to ship your AI feature next quarter
+            instead of next year?
+          </strong>
+          Because that's the gap between building on proven patterns (event-sourced
+          architectures, tiered LLM routing, proper observability) versus discovering
+          that your vector database corrupts embeddings at scale... in production...
+          on a Friday.
+        </p>
+        <p>
+          <strong> You're probably thinking this sounds expensive.</strong>
+          You might worry about hiring someone who disappears after building something
+          only they understand. Fair concerns. That's why your team inherits documented
+          systems they can modify, not black boxes. A codebase with actual error
+          handling. Infrastructure as Code you can deploy yourself. Monitoring that
+          tells you "the semantic search degraded by 15%" not just "something broke."
         </p>
       </div>
-      <div>
+      <!-- div>
         <h3 class="heading text-2xl uppercase my-8 text-secondary">
           My Skills
         </h3>
@@ -73,7 +103,7 @@
             MonogDB
           </span>
         </div>
-      </div>
+      </div -->
     </div>
   </div>
 </section>
