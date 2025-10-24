@@ -1,19 +1,16 @@
-import { defineConfig } from "astro/config";
-import sitemap from "@astrojs/sitemap";
-import mdx from "@astrojs/mdx";
-import pagefind from "astro-pagefind";
+// @ts-check
 import tailwindcss from "@tailwindcss/vite";
+import { defineConfig } from "astro/config";
+
+import { SITE } from "./src/consts";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://nickseagull.dev",
-  integrations: [sitemap(), mdx(), pagefind()],
+  site: SITE.URL,
   vite: {
     plugins: [tailwindcss()],
   },
-  markdown: {
-    shikiConfig: {
-      theme: "css-variables",
-    },
-  },
+
+  integrations: [sitemap()],
 });

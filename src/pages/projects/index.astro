@@ -1,32 +1,18 @@
 ---
-import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
-import Container from "@components/Container.astro";
-import ArrowCard from "@components/ArrowCard.astro";
+import Card from "@components/Card.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
 import { PROJECTS } from "@consts";
 
-const projects = (await getCollection("projects"))
-  .filter((project) => !project.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const allProjects: CollectionEntry<"projects">[] =
+  await getCollection("projects");
 ---
 
 <Layout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
-  <Container>
-    <aside data-pagefind-ignore>
-      <div class="space-y-10">
-        <div class="animate font-semibold text-black dark:text-white">
-          Projects
-        </div>
-        <ul class="animate not-prose flex flex-col gap-4">
-          {
-            projects.map((project) => (
-              <li>
-                <ArrowCard entry={project} />
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    </aside>
-  </Container>
+  <section id="Projects" class="container mx-auto px-6 pt-18">
+    <h2 class="heading text-5xl md:text-9xl uppercase mr-4 md:mr-8 my-8">
+      work
+    </h2>
+    {allProjects.map((project) => <Card entry={project} />)}
+  </section>
 </Layout>
