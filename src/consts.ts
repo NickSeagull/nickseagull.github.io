@@ -1,6 +1,6 @@
 export const SITE = {
   URL: "https://nickseagull.dev",
-  TITLE: "nickseagull.dev",
+  TITLE: "Nick Tchayka",
   DESCRIPTION: "",
   EMAIL: "letsbuild@nickseagull.dev",
 };
