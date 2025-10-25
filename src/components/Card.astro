@@ -17,7 +17,7 @@ const cardImage =
   
    entry.data.image?.url ||
 (entry.data.videoId 
-  ? `https://img.youtube.com/vi/${entry.videoId}/mqdefault.jpg`
+  ? `https://img.youtube.com/vi/${entry.data.videoId}/sddefault.jpg`
                 : `https://placehold.co/600x400?text=${entry.data.title}`)
 ---
 
