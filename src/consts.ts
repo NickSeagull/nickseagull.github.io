@@ -20,6 +20,11 @@ export const PROJECTS = {
   DESCRIPTION: "",
 };
 
+export const TALKS = {
+  TITLE: "Talks",
+  DESCRIPTION: "",
+};
+
 export const SOCIALS = [
   {
     NAME: "Twitter",

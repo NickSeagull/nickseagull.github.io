@@ -5,6 +5,7 @@ import { getCollection, type CollectionEntry } from "astro:content";
 
 const allPosts: CollectionEntry<"talks">[] = (await getCollection("talks"))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .filter((a) => Boolean(a.data.videoId))
   .slice(0, 3);
 ---
 
@@ -32,6 +33,14 @@ const allPosts: CollectionEntry<"talks">[] = (await getCollection("talks"))
     </div>
   </div>
   {allPosts.map((post) => <Card entry={post} />)}
+  <div>
+    <div class="flex flex-col justify-center md:flex-row gap-2.5">
+      <a
+        class="w-full text-2xl sm:w-auto flex items-center justify-center bg-foreground text-background rounded-2xl py-3 px-6 sm:py-4 sm:px-10 cursor-pointer hover:bg-background hover:outline hover:outline-1 hover:outline-dashed hover:outline-secondary hover:text-foreground transition"
+        href="/talks">More Talks</a
+      >
+    </div>
+  </div>
 </section>
 
 <style>

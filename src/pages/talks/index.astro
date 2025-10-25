@@ -2,7 +2,8 @@
 import Layout from "@layouts/Layout.astro";
 import Card from "@components/Card.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
-import { talks } from "@consts";
+import { TALKS } from "@consts";
+import { Content } from '@components/OtherTalks.md'
 
 const data = (await getCollection("talks"))
   .filter((post) => !post.data.draft)
@@ -24,7 +25,7 @@ const posts = data.reduce((acc: Acc, post) => {
 const years = Object.keys(posts).sort((a, b) => parseInt(b) - parseInt(a));
 ---
 
-<Layout title={talks.TITLE} description={talks.DESCRIPTION}>
+<Layout title={TALKS.TITLE} description={TALKS.DESCRIPTION}>
   <section id="talks" class="container mx-auto px-6 pt-18">
     <h2 class="heading text-5xl md:text-9xl uppercase mr-4 md:mr-8 my-8">
       talks
@@ -45,5 +46,8 @@ const years = Object.keys(posts).sort((a, b) => parseInt(b) - parseInt(a));
         ))
       }
     </section>
+    <article class="px-3 flex-2 mx-auto mb-18">
+      <Content/>
+    </article>
   </section>
 </Layout>
