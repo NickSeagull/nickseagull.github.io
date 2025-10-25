@@ -2,12 +2,23 @@
 import type { CollectionEntry } from "astro:content";
 
 type Props = {
-    entry: CollectionEntry<"blog"> | CollectionEntry<"projects">;
+entry: CollectionEntry<"blog"> 
+  | CollectionEntry<"projects">
+  | CollectionEntry<"talks">;
 };
 
 const { entry } = Astro.props as {
-    entry: CollectionEntry<"blog"> | CollectionEntry<"projects">;
+  entry: CollectionEntry<"blog"> 
+  | CollectionEntry<"projects">
+  | CollectionEntry<"talks">;
 };
+
+const cardImage = 
+  
+   entry.data.image?.url ||
+(entry.data.videoId 
+  ? `https://img.youtube.com/vi/${entry.videoId}/mqdefault.jpg`
+                : `https://placehold.co/600x400?text=${entry.data.title}`)
 ---
 
 <script>
@@ -97,8 +108,7 @@ const { entry } = Astro.props as {
         class="w-full md:max-w-[610px] aspect-[610/400] overflow-hidden border-dashed border-secondary rounded-3xl"
     >
         <img
-            src={entry.data.image?.url ||
-                `https://placehold.co/600x400?text=${entry.data.title}`}
+            src={cardImage}
             alt={entry.data.image?.alt || entry.data.title}
             class="w-full h-full object-cover"
         />

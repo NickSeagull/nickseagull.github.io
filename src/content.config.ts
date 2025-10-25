@@ -19,6 +19,23 @@ const blog = defineCollection({
   }),
 });
 
+const talks = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/talks" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    date: z.coerce.date(),
+    tags: z.array(z.string()).optional(),
+    videoId: z.string().optional(),
+    image: z
+      .object({
+        url: z.string(),
+        alt: z.string(),
+      })
+      .optional(),
+  }),
+});
+
 const projects = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/projects" }),
   schema: z.object({
@@ -33,4 +50,4 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { blog, projects };
+export const collections = { blog, projects, talks };
