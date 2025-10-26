@@ -7,54 +7,81 @@
       <div class="text-lg md:text-2xl text-secondary space-y-4">
         <p>
           <strong
-            >It seems like you're watching competitors launch AI features while
-            your team debates whether to use OpenAI or Claude, how to handle
-            rate limits, and if vector databases are even necessary.</strong
+            >It seems like your daily standups have become debugging sessions
+            where half the team waits while someone traces through spaghetti
+            code to figure out why production broke... again.</strong
           >
         </p>
         <p>
-          <b>"...if vector databases are even necessary?"</b>
+          Your frontend team thinks &quot;user&quot; means one thing and your
+          backend team thinks another, you don&#39;t just get bugs - you get
+          architectural drift. Each team builds their own workarounds, and every
+          new feature makes the system harder to understand. Now someone
+          suggests adding AI features, and suddenly you&#39;re dealing with
+          embeddings, token limits, and vector databases on top of an already
+          fragile foundation.
         </p>
         <p>
-          Exactly. These aren't trivial decisions. When your RAG system needs to
-          search through 100,000 documents in under 200ms, the difference
-          between Pinecone and PGVector isn't philosophical - it's whether your
-          users wait 2 seconds or give up. When your LLM costs hit
-          $50,000/month, knowing how to implement semantic caching and
-          intelligent batching becomes the difference between a sustainable
-          product and a cancelled project.
+          <strong
+            >Would it be a bad idea to work alongside someone who shows your
+            team how to make these problems structurally impossible?</strong
+          >
         </p>
         <p>
-          <strong>
-            Would it be terrible to have someone who's already made these
-            expensive mistakes on someone else's budget?
-          </strong>
+          Picture this: Instead of pair programming on adding more try-catch
+          blocks, we're doing an <strong>event modeling session</strong> that even
+          non-technical people can understand. For the first time estimates start
+          working, and your system gets audit trails <em>and</em> a performance boost.
+          Your junior developer learns why immutable data structures prevent that
+          whole class of &quot;but it was working yesterday&quot; bugs. And, when
+          we implement that RAG system, your team sees firsthand how functional composition
+          turns a complex LLM pipeline into small, testable pieces they can actually
+          reason about.
         </p>
         <p>
-          Your team gets production-ready architectures that handle real issues:
-          automatic fallbacks when OpenAI goes down (it will), token
-          optimization that cuts costs by 60% without sacrificing quality, and
-          hybrid search that actually returns relevant results instead of
-          semantic nonsense. Your stakeholders get demos they can understand,
-          not lectures about embeddings.
+          <strong
+            >How valuable would it be if your team learned why that &quot;AI
+            doesn&#39;t work&quot; complaint was actually a malformed locale
+            string?</strong
+          > Not a hallucination, not a model failure - just an environment variable
+          that made your French embeddings get searched with English queries. I&#39;ve
+          seen teams waste weeks debugging &quot;AI problems&quot; that were really
+          just classic distributed systems failures. Working together, your team
+          learns to build evaluation suites - the unit tests of LLM systems - so
+          when someone changes a prompt to fix one case, they don&#39;t break 100
+          others.
         </p>
         <p>
-          <strong>
-            How much would it be worth to ship your AI feature next quarter
-            instead of next year?
-          </strong>
-          Because that's the gap between building on proven patterns (event-sourced
-          architectures, tiered LLM routing, proper observability) versus discovering
-          that your vector database corrupts embeddings at scale... in production...
-          on a Friday.
+          <strong
+            >You&#39;re probably thinking &quot;great, another consultant
+            who&#39;ll push their favorite framework then leave.&quot;</strong
+          > You might worry about your team rejecting academic approaches or falling
+          back to old habits. Those are real risks. That&#39;s why I work in your
+          codebase, with your constraints, using mostly tools you already have. TypeScript
+          becomes powerful when you actually use its type system. Your existing event
+          bus becomes an event-sourced architecture one service at a time. And that
+          vector database decision? Your team learns through real implementation
+          why multi-tenancy means you can&#39;t just &quot;shove everything into
+          the AI and let it work.&quot;
         </p>
         <p>
-          <strong> You're probably thinking this sounds expensive.</strong>
-          You might worry about hiring someone who disappears after building something
-          only they understand. Fair concerns. That's why your team inherits documented
-          systems they can modify, not black boxes. A codebase with actual error
-          handling. Infrastructure as Code you can deploy yourself. Monitoring that
-          tells you "the semantic search degraded by 15%" not just "something broke."
+          The difference: Three months later, your team is teaching <em
+            >each other</em
+          > why each RAG component should be its own service (&quot;because we&#39;ve
+          seen what happens when embeddings generation takes down search&quot;),
+          implementing guardrail LLMs to cut costs by 70% (using the pattern we built
+          together), and reviewing PRs with &quot;have you considered making this
+          state transition pure?&quot; - not because I told them to, but because
+          they&#39;ve felt the difference.
+        </p>
+        <p>
+          <strong
+            >Are you against having a team that catches environment
+            misconfigurations at compile time instead of when the CEO demos to
+            investors?</strong
+          > Because that&#39;s what happens when type-driven development meets production
+          AI - your locale string can&#39;t be malformed if it&#39;s a proper type,
+          not a string. Your team stops firefighting and starts shipping.
         </p>
       </div>
       <!-- div>
